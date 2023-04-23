@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculadora de média</title>
+  <meta charset="utf-8">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input[type="number"] {
+      width: 50px;
+      margin-bottom: 10px;
+    }
+    #resultado {
+      margin-top: 10px;
+      padding: 10px;
+      font-weight: bold;
+      text-align: center;
+      color: #fff;
+    }
+    #resultado.aprovado {
+      background-color: green;
+    }
+    #resultado.reprovado {
+      background-color: red;
+    }
+    #resultado.recuperacao {
+      background-color: blue;
+    }
+  </style>
+</head>
+<body>
+  <h1>Calculadora de média</h1>
+
+  <form>
+    <label for="nome">Nome do aluno:</label>
+    <input type="text" id="nome">
+
+    <label for="nota1">Nota 1:</label>
+    <input type="number" id="nota1">
+
+    <label for="nota2">Nota 2:</label>
+    <input type="number" id="nota2">
+
+    <label for="nota3">Nota 3:</label>
+    <input type="number" id="nota3">
+
+    <label for="nota4">Nota 4:</label>
+    <input type="number" id="nota4">
+
+    <button type="button" onclick="calcularMedia()">Calcular média</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <script>
+    function calcularMedia() {
+      const nome = document.getElementById("nome").value;
+      const nota1 = parseFloat(document.getElementById("nota1").value);
+      const nota2 = parseFloat(document.getElementById("nota2").value);
+      const nota3 = parseFloat(document.getElementById("nota3").value);
+      const nota4 = parseFloat(document.getElementById("nota4").value);
+
+      if (isNaN(nota1) || isNaN(nota2) || isNaN(nota3) || isNaN(nota4)) {
+        alert("Informe todas as notas!");
+        return;
+      }
+
+      const media = (nota1 + nota2 + nota3 + nota4) / 4;
+
+      let situacao;
+      let classeResultado;
+      if (media >= 6) {
+        situacao = "Aprovado";
+        classeResultado = "aprovado";
+      } else if (media < 2) {
+        situacao = "Reprovado";
+        classeResultado = "reprovado";
+      } else {
+        situacao = "Recuperação";
+        classeResultado = "recuperacao";
+      }
+      const resultado = document.getElementById("resultado");
+      resultado.innerHTML = `${nome}, sua média é ${media.toFixed(1)} e você está ${situacao}.`;
+      resultado.className = classeResultado;
+    }
+  </script>
+</body>
+</html>
